@@ -2,9 +2,7 @@ trigger:
   branches:
     include:
       - main
-  paths:
-    include:
-      - 2023-12-aks-argocd-pipeline
+
 
 resources:
   repositories:
@@ -91,17 +89,6 @@ stages:
               overwrite: true
           
 
-  #         # - task: qetza.replacetokens.replacetokens-task.replacetokens@6
-  #         #   displayName: Replace tokens
-  #         #   inputs:
-  #         #     rootDirectory: $(Build.ArtifactStagingDirectory)/base
-  #         #     targetFiles: "deployment.yaml"
-  #         #     encoding: auto
-  #         #     writeBOM: true
-  #         #     escapeType: no escaping
-  #         #     actionOnMissing: log warning
-  #         #     tokenPrefix: __
-  #         #     tokenSuffix: __
           - script: |
               cd $(Build.ArtifactStagingDirectory)
               sed -i 's/__Build.BuildId__/$(Build.BuildId)/g' stage/deployment.yml
